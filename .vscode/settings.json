@@ -1,0 +1,7 @@
+{
+  "eslint.options": {
+    "rules": {
+      "eslint.enable": false
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.m-form {
+  width: 100%;
+  position: relative;
+
+  &__inputContainer {
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: transparent;
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $color-white;
+  }
+
+  &__input::placeholder {
+    color: $color-grey;
+  }
+
+  &__error {
+    position: absolute;
+    color: $color-error;
+    font-size: 12px;
+  }
+}

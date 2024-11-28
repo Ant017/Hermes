@@ -1,0 +1,22 @@
+.a-searchBar {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  background-color: transparent;
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: $color-white;
+  }
+}

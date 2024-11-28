@@ -1,0 +1,45 @@
+.m-profilePopup {
+  padding: 20px;
+
+  &__details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__email {
+    font-size: 14px;
+    color: $color-grey;
+  }
+
+  &__bio {
+    margin: 10px 0;
+    font-size: 14px;
+    color: $color-white;
+  }
+
+  &__actions {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+}

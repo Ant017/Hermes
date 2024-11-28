@@ -1,0 +1,50 @@
+.a-button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+  }
+
+  &--bg-white {
+    background-color: $color-white;
+  }
+
+  &--bg-transparent {
+    background-color: transparent;
+  }
+
+  &--hasBorder {
+    border: 1px solid $color-white;
+  }
+
+  &--pd-10 {
+    padding: 10px;
+  }
+
+  &--pd-8 {
+    padding: 8px;
+  }
+
+  &--br-2 {
+    border-radius: 2px;
+  }
+
+  &--width-100 {
+    width: 100%;
+  }
+
+  &--width-50 {
+    width: 50%;
+  }
+
+  &--color-white {
+    color: $color-white;
+  }
+}
