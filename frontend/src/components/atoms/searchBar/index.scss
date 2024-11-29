@@ -3,10 +3,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid $color-grey-border;
   border-radius: 2px;
   box-sizing: border-box;
-  background-color: transparent;
+  background-color: $color-transparent;
+  position: relative;
 
   &__icon {
     width: 18px;
@@ -14,9 +15,21 @@
   }
 
   &__input {
-    background-color: transparent;
+    background-color: $color-transparent;
     border: none;
     outline: none;
     color: $color-white;
+  }
+
+  &__usersPopup {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+    width: 233px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 10px;
   }
 }

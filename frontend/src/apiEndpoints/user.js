@@ -50,3 +50,18 @@ export const ProfilePicApi = async () => {
     handleApiError(error);
   }
 };
+
+// get all users API
+export const GetAllUsersApi = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/v1/user/all`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    console.log(response);
+    return handleApiResponseWithoutToast(response);
+  } catch (error) {
+    handleApiError(error);
+  }
+};
