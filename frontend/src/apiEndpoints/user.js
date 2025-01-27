@@ -52,9 +52,17 @@ export const ProfilePicApi = async () => {
 };
 
 // get all users API
-export const GetAllUsersApi = async () => {
+export const GetAllUsersApi = async (searchQuery) => {
   try {
-    const response = await axiosInstance.get(`/api/v1/user/all`, {
+    const queryParams = {
+      search: searchQuery,
+    }
+
+    let queryString = Object.entries(queryParams)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    const response = await axiosInstance.get(`/api/v1/user/all?${queryString}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

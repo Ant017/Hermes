@@ -113,6 +113,27 @@ class UserController {
       return res.status(500).send(failure("Internal server error", error));
     }
   }
+
+  async getUser(req, res) {
+    try {
+      const userId = req.params.userId;
+
+      if (!userId) {
+        return res.status(404).send(failure("User ID is required"));
+      }
+
+      const user = await userModel.findById(userId);
+
+      if (!user) {
+        return res.status(404).send(failure("User not found"));
+      }
+
+      return res.status(200).send(success("User fetched successfully", user));
+    } catch (error) {
+      console.log("Error has occurred", error);
+      return res.status(500).send(failure("Internal server error", error));
+    }
+  }
 }
 
 module.exports = new UserController();

@@ -13,5 +13,6 @@ routes.post(
 );
 routes.get("/profile", isUserLoggedIn, UserController.profile);
 routes.get("/profile-pic", isUserLoggedIn, UserController.getProfilePic);
+routes.get("/get-user/:userId", isUserLoggedIn, UserController.getUser);
 
 module.exports = routes;

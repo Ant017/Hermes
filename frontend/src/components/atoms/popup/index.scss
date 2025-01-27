@@ -21,4 +21,10 @@
     transform: translateY(0);
     pointer-events: auto;
   }
+
+  &.left-position {
+    left: 39px;
+    width: 438px;
+    top: 70px;
+  }
 }

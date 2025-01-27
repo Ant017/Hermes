@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px;
+    padding: 20px 40px;
   }
 
   &__profileImage {
@@ -49,5 +49,32 @@
 
   &__notificationIcon {
     margin-right: 15px;
+  }
+  &__searchPopup {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+  }
+  &__searchResult {
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  &__noUser {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  &__noUserIcon {
+    width: 50px;
+    height: 50px;
   }
 }

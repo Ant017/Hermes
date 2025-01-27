@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 const handleApiResponse = (response) => {
   const data = response.data;
 
-  console.log("API response:", data.data);
   if (data.success === true) {
     toast.success(data.message);
     return data.data;
@@ -16,7 +15,6 @@ const handleApiResponse = (response) => {
 const handleApiResponseWithoutToast = (response) => {
   const data = response.data;
 
-  console.log("API response:", data.data);
   if (data.success === true) {
     return data.data;
   } else {
