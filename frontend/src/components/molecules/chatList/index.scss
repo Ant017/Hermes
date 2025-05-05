@@ -64,11 +64,99 @@
     align-items: center;
     gap: 10px;
     padding: 15px 20px;
-    background: linear-gradient(
-      to bottom,
-      rgba(67, 67, 67, 0.2),
-      rgba(0, 0, 0, 0.1)
-    );
+    .m-chatList {
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px);
+      color: $color-white;
+      width: 30%;
+      border-radius: 4px 0 0 4px;
+      height: 100%;
+    
+      &__title,
+      &__chatOption {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+      }
+    
+      &__title {
+        gap: 10px;
+      }
+    
+      &__icon {
+        width: 18px;
+        height: 18px;
+      }
+    
+      &__titleText {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    
+      &__chatOption {
+        gap: 10px;
+      }
+    
+      &__chatOptionText {
+        font-size: 14px;
+        color: $color-grey;
+        border: 1px solid $color-grey;
+        border-radius: 20px;
+        padding: 5px 15px;
+    
+        &:hover {
+          color: $color-white;
+          background-color: $color-grey;
+          cursor: pointer;
+        }
+      }
+    
+      &__group {
+        width: 40px;
+        height: 40px;
+        border: 1px solid $color-grey;
+        border-radius: 50%;
+      }
+    
+      &__chats {
+        display: flex;
+        flex-direction: column;
+        height: 77%;
+        overflow-y: auto;
+      }
+    
+      &__chat {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 20px;
+        background: linear-gradient(
+          to bottom,
+          rgba(67, 67, 67, 0.2),
+          rgba(0, 0, 0, 0.1)
+        );
+      }
+    
+      &__chatName {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    
+      &__lastMessage {
+        font-size: 14px;
+        color: $color-grey;
+      }
+    
+      &__noChat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 18px;
+        color: $color-grey;
+      }
+    }
+    
   }
 
   &__chatName {
@@ -78,6 +166,15 @@
 
   &__lastMessage {
     font-size: 14px;
+    color: $color-grey;
+  }
+
+  &__noChat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 18px;
     color: $color-grey;
   }
 }

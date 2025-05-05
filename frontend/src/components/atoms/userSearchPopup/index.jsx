@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import warningIcon from "/icons/danger.png";
 import useCommonHook from "../../../hooks/useCommonHook";
 
-const UserSearchPopup = ({ filteredUsers, setUserList, closeSearchPopup }) => {
+const UserSearchPopup = ({
+  filteredUsers,
+  setUserList,
+  closeSearchPopup,
+  setSelectedUser,
+}) => {
   const { users } = useCommonHook();
 
   useEffect(() => {
@@ -16,7 +21,10 @@ const UserSearchPopup = ({ filteredUsers, setUserList, closeSearchPopup }) => {
           <div
             key={user._id}
             className="m-header__searchResult"
-            onClick={closeSearchPopup}
+            onClick={() => {
+              setSelectedUser(user.username);
+              closeSearchPopup();
+            }}
           >
             {user.username}
           </div>

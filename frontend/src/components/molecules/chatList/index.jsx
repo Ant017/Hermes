@@ -23,31 +23,35 @@ const ChatList = ({ chats }) => {
       </div>
       <Divider horizontal={true} color="grey-light" />
       <div className="m-chatList__chats">
-        {chats?.slice(0, 10).map((chat) => {
-          return (
-            <div className="m-chatList__chat" key={chat._id}>
-              {chat.isGroupChat ? (
-                <img
-                  className="m-chatList__group"
-                  src={groupIcon}
-                  alt="group icon"
-                />
-              ) : (
-                <img
-                  className="m-chatList__group"
-                  src={groupIcon}
-                  alt="group icon"
-                />
-              )}
-              <div>
-                <p className="m-chatList__chatName">{chat.chatName}</p>
-                <p className="m-chatList__lastMessage">
-                  {chat.latestMessage?.content}
-                </p>
+        {chats && chats.length > 0 ? (
+          chats.slice(0, 10).map((chat) => {
+            return (
+              <div className="m-chatList__chat" key={chat._id}>
+                {chat.isGroupChat ? (
+                  <img
+                    className="m-chatList__group"
+                    src={groupIcon}
+                    alt="group icon"
+                  />
+                ) : (
+                  <img
+                    className="m-chatList__group"
+                    src={groupIcon}
+                    alt="group icon"
+                  />
+                )}
+                <div>
+                  <p className="m-chatList__chatName">{chat.chatName}</p>
+                  <p className="m-chatList__lastMessage">
+                    {chat.latestMessage?.content}
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="m-chatList__noChat">No chats available</div>
+        )}
       </div>
     </div>
   );

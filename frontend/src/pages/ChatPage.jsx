@@ -13,6 +13,7 @@ const ChatPage = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
 
   const profilePopupRef = useRef(null);
   const searchPopupRef = useRef(null);
@@ -44,6 +45,7 @@ const ChatPage = () => {
         setShowSearchPopup={setShowSearchPopup}
         showSearchPopup={showSearchPopup}
         setFilteredUsers={setFilteredUsers}
+        value={selectedUser}
       />
       <Popup
         show={showProfilePopup}
@@ -61,11 +63,12 @@ const ChatPage = () => {
           filteredUsers={filteredUsers}
           setUserList={setFilteredUsers}
           closeSearchPopup={closeSearchPopup}
+          setSelectedUser={setSelectedUser}
         />
       </Popup>
       <div className="p-chat__container">
         <ChatList chats={chats} />
-        <div key={chats.length} className="p-chat__right"></div>
+        <div key={chats && chats.length} className="p-chat__right"></div>
       </div>
     </div>
   );

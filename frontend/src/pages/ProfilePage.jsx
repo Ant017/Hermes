@@ -60,24 +60,26 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Form
-          label="Upload a Profile Picture"
-          type="file"
-          name="image"
-          onChange={handleFileChange}
-          control={control}
-          placeholder="Enter your profile picture"
-          errors={errors}
-        />
-        <Button type="submit" value="Upload"></Button>
-      </form>
+    <div className="p-profile">
+      <div className="p-profile__container">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Form
+            label="Upload a Profile Picture"
+            type="file"
+            name="image"
+            onChange={handleFileChange}
+            control={control}
+            placeholder="Enter your profile picture"
+            errors={errors}
+          />
+          <Button type="submit" value="Upload"></Button>
+        </form>
 
-      <h1>Profile Page</h1>
-      <p>Name: {profile?.username}</p>
-      <p>Email: {profile?.email}</p>
-      {imageUrl && <img src={imageUrl} alt="Uploaded" />}
+        <h1>Profile Page</h1>
+        <p>Name: {profile?.username}</p>
+        <p>Email: {profile?.email}</p>
+        {imageUrl && <img src={imageUrl} alt="Uploaded" />}
+      </div>
     </div>
   );
 };
