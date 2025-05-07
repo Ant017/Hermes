@@ -3,13 +3,30 @@ import chatIcon from "/icons/chat.png";
 import { chatOptions } from "../../../utils/constants";
 import groupIcon from "/icons/team.png";
 import "./index.scss";
+import Button from "../../atoms/button";
+import plusIcon from "/icons/plus.png";
 
 const ChatList = ({ chats }) => {
   return (
     <div className="m-chatList">
-      <div className="m-chatList__title">
-        <img className="m-chatList__icon" src={chatIcon} alt="chat icon" />
-        <p className="m-chatList__titleText">All Chats</p>
+      <div className="m-chatList__header">
+        <div className="m-chatList__title">
+          <img className="m-chatList__icon" src={chatIcon} alt="chat icon" />
+          <p className="m-chatList__titleText">All Chats</p>
+        </div>
+        <div className="m-chatList__addChat">
+          <Button
+            value="Add Member"
+            type="button"
+            // onClick={() => navigate("/profile")}
+            backgroundColor="transparent"
+            width="100"
+            icon={plusIcon}
+            hasBorder
+            color="white"
+            padding="8"
+          />
+        </div>
       </div>
       <Divider horizontal={true} color="grey-light" />
       <div className="m-chatList__chatOption">

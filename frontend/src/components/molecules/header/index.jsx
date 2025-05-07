@@ -45,7 +45,6 @@ const Header = ({
           <SearchBar
             onChange={handleSearchChange}
             placeholder="Search users..."
-            value={value}
           />
           <div className="m-header__profileContainer">
             <img
