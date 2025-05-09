@@ -11,11 +11,11 @@ const Button = ({
   size,
   padding,
   icon,
-  hasBorder = false,
   borderRadius,
   children,
   width,
   color,
+  border
 }) => {
   const className = mapModifiers(
     "a-button",
@@ -25,7 +25,7 @@ const Button = ({
     `br-${borderRadius}`,
     `width-${width}`,
     `color-${color}`,
-    hasBorder && "hasBorder",
+    `border-${border}`,
     isDisabled && "disabled"
   );
 

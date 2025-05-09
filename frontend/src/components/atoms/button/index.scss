@@ -20,8 +20,16 @@
     background-color: transparent;
   }
 
-  &--hasBorder {
+  &--border-white {
     border: 1px solid $color-white;
+  }
+
+  &--border-transparent {
+    border: 1px solid transparent;
+  }
+
+  &--border-gray {
+    border: 1px solid $color-grey;
   }
 
   &--pd-10 {
@@ -34,6 +42,10 @@
 
   &--br-2 {
     border-radius: 2px;
+  }
+
+  &--br-20 {
+    border-radius: 20px;
   }
 
   &--width-100 {

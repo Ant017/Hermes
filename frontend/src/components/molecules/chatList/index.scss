@@ -12,22 +12,37 @@
     align-items: center;
     background-color: $color-black;
     border-radius: 4px 4px 0 0;
+    padding: 20px;
   }
 
   &__title,
   &__chatOption {
     display: flex;
     align-items: center;
-    padding: 20px;
   }
 
   &__title {
     gap: 10px;
   }
 
+  &__chatOption {
+    padding: 20px;
+  }
+
   &__icon {
     width: 18px;
     height: 18px;
+  }
+
+  &__plus {
+    font-size: 20px;
+  }
+
+  &__addChat {
+    &:hover {
+      color: $color-grey;
+      cursor: pointer;
+    }
   }
 
   &__titleText {

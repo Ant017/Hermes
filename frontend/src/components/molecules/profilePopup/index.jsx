@@ -48,7 +48,7 @@ const ProfilePopup = () => {
           backgroundColor="transparent"
           width="100"
           icon={profileIcon}
-          hasBorder
+          border="white"
           color="white"
           padding="8"
         />
@@ -58,7 +58,7 @@ const ProfilePopup = () => {
           backgroundColor="white"
           width="100"
           onClick={logout}
-          hasBorder
+          border="white"
           icon={logoutIcon}
           padding="8"
 

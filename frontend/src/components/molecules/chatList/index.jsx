@@ -2,11 +2,20 @@ import Divider from "../../atoms/divider";
 import chatIcon from "/icons/chat.png";
 import { chatOptions } from "../../../utils/constants";
 import groupIcon from "/icons/team.png";
-import "./index.scss";
 import Button from "../../atoms/button";
-import plusIcon from "/icons/plus.png";
+import Modal from "../../atoms/modal";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import CreateGroupChat from "../modals/createGroupChat";
+import "./index.scss";
 
 const ChatList = ({ chats }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="m-chatList">
       <div className="m-chatList__header">
@@ -16,16 +25,18 @@ const ChatList = ({ chats }) => {
         </div>
         <div className="m-chatList__addChat">
           <Button
-            value="Add Member"
             type="button"
-            // onClick={() => navigate("/profile")}
+            onClick={() => {
+              setShowModal(true);
+            }}
             backgroundColor="transparent"
             width="100"
-            icon={plusIcon}
-            hasBorder
             color="white"
-            padding="8"
-          />
+            borderRadius="20"
+          >
+            <span className="m-chatList__plus">+&nbsp;</span>
+            <span>Create Group Chat</span>
+          </Button>
         </div>
       </div>
       <Divider horizontal={true} color="grey-light" />
@@ -70,6 +81,15 @@ const ChatList = ({ chats }) => {
           <div className="m-chatList__noChat">No chats available</div>
         )}
       </div>
+      {/* portal is for rendering the modal directly in the body, not as a child of the chatList component */}
+      {/* only changes the physical location of the modal in the DOM, but it still acts as a children of the parent */}
+      {showModal &&
+        createPortal(
+          <Modal handleClose={handleClose} title="Create A New Group Chat">
+            <CreateGroupChat />
+          </Modal>,
+          document.body
+        )}
     </div>
   );
 };
