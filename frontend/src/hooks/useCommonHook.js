@@ -4,7 +4,6 @@ import useDebounce from "./useDebounceHook";
 
 const useCommonHook = () => {
   const [users, setUsers] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState("");
 
   const debouncedQuery = useDebounce(searchQuery, 500);
@@ -16,21 +15,20 @@ const useCommonHook = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = debouncedQuery.trim()
-          ? await GetAllUsersApi(debouncedQuery)
-          : await GetAllUsersApi("");
-
-        setUsers(response);
-        console.log("Fetched users:", response);
+        const response = await GetAllUsersApi(debouncedQuery || "");
+        if (response) {
+          setUsers(response);
+        }
       } catch (error) {
         console.error("Error fetching users:", error);
+        setUsers([]);
       }
     };
 
     fetchUsers();
   }, [debouncedQuery]);
 
-  return { users, handleSearch };
+  return { users, handleSearch, searchQuery };
 };
 
 export default useCommonHook;

@@ -3,15 +3,29 @@
   position: relative;
 
   &__inputContainer {
-    padding: 12px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border: 1px solid #ccc;
+
     border-radius: 2px;
     box-sizing: border-box;
     background-color: transparent;
+
+    &--border-basic {
+      border: 1px solid #ccc;
+    }
+
+    &--border-underlined {
+      border-bottom: 1px solid $color-white;
+    }
+
+    &--pd-default {
+      padding: 12px 20px;
+    }
+    &--pd-small {
+      padding: 8px 10px;
+    }
   }
 
   &__icon {

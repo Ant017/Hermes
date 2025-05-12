@@ -24,9 +24,7 @@
   }
 
   &__content {
-    width: 600px;
     height: auto;
-    min-height: 500px;
     backdrop-filter: blur(20px);
     background-color: rgb(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -35,6 +33,21 @@
     position: relative;
     z-index: 101;
     color: $color-white;
+
+    &--sz-small {
+      width: 400px;
+      min-height: 200px;
+    }
+
+    &--sz-medium {
+      width: 600px;
+      min-height: 500px;
+    }
+
+    &--sz-large {
+      width: 800px;
+      min-height: 600px;
+    }
   }
 
   &__header {

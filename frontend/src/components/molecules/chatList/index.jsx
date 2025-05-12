@@ -85,8 +85,8 @@ const ChatList = ({ chats }) => {
       {/* only changes the physical location of the modal in the DOM, but it still acts as a children of the parent */}
       {showModal &&
         createPortal(
-          <Modal handleClose={handleClose} title="Create A New Group Chat">
-            <CreateGroupChat />
+          <Modal handleClose={handleClose} title="Create A New Group Chat" size="small">
+            <CreateGroupChat closeModal={handleClose} />
           </Modal>,
           document.body
         )}

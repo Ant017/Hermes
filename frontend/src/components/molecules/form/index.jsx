@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
-import "./index.scss";
 import Divider from "../../atoms/divider";
+import { mapModifiers } from "../../../utils/mapModifier";
+import "./index.scss";
 
 const Form = ({
   label,
@@ -13,11 +14,18 @@ const Form = ({
   onChange,
   icon,
   iconAlt,
+  border,
+  padding = "default",
 }) => {
+  const className = mapModifiers(
+      "m-form__inputContainer",
+      `border-${border}`,
+      `pd-${padding}`
+    );
   return (
     <div className="m-form">
       <label htmlFor={name}>{label}</label>
-      <div className="m-form__inputContainer">
+      <div className={className}>
         {icon && (
           <>
             <img className="m-form__icon" src={icon} alt={iconAlt} />

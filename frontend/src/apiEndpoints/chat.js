@@ -5,6 +5,24 @@ import {
   handleApiResponse,
 } from "../utils/apiResponseHandler";
 
+// access chat API
+export const accessChatApi = async (userId) => {
+  try {
+    const response = await axiosInstance.post(
+      `/api/v1/chat/access`,
+      { userId },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return handleApiResponseWithoutToast(response);
+  } catch (error) {
+    handleApiError(error);
+  }
+};
+
 // get all chats API
 export const GetAllChatsApi = async () => {
   try {
@@ -19,6 +37,7 @@ export const GetAllChatsApi = async () => {
   }
 };
 
+// create group chat API
 export const createGroupChatApi = async (formData) => {
   try {
     const response = await axiosInstance.post(

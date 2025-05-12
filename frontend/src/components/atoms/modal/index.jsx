@@ -1,11 +1,16 @@
 import closeIcon from "/icons/x-mark.png";
 import "./index.scss";
+import { mapModifiers } from "../../../utils/mapModifier";
 
-const Modal = ({ title, children, handleClose }) => {
+const Modal = ({ title, children, handleClose, size }) => {
+  const className = mapModifiers(
+      "m-modal__content",
+      `sz-${size}`,
+    );
   return (
     <div className="m-modal">
       <div className="m-modal__overlay">
-        <div className="m-modal__content">
+        <div className={className}>
           <div className="m-modal__header">
             <p className="m-modal__title">{title}</p>
             <img
@@ -16,10 +21,6 @@ const Modal = ({ title, children, handleClose }) => {
             />
           </div>
           <div className="m-modal__body">{children}</div>
-          {/* <div className="m-modal__footer">
-            <button className="m-modal__confirmButton">Confirm</button>
-            <button className="m-modal__cancelButton">Cancel</button>
-          </div> */}
         </div>
       </div>
     </div>
