@@ -1,11 +1,37 @@
 import "./index.scss";
 
-const CustomCheckBox = ({ option }) => {
+const CustomCheckBox = ({
+  id,
+  name,
+  value,
+  checked,
+  onChange,
+  label,
+  disabled = false,
+  size = "medium",
+  className = "",
+}) => {
   return (
-    <label className="a-checkbox">
-      <input className="a-checkbox__input" type="checkbox" />
-      <span className="a-checkbox__label">{option}</span>
-    </label>
+    <div
+      className={`a-checkbox ${size} ${className} ${
+        disabled ? "disabled" : ""
+      }`}
+    >
+      <label className="a-checkbox__container">
+        {label && <span className="a-checkbox__label">{label}</span>}
+        <input
+          type="checkbox"
+          id={id}
+          name={name}
+          value={value}
+          checked={checked}
+          onChange={onChange}
+          disabled={disabled}
+          className="a-checkbox__input"
+        />
+        <span className="a-checkbox__checkmark"></span>
+      </label>
+    </div>
   );
 };
 

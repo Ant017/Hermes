@@ -12,6 +12,7 @@ import { saveChatListState } from "../redux/slices/chatSlice";
 const ChatPage = () => {
   const dispatch = useDispatch();
   const { users } = useCommonHook();
+  const { selectedOption } = useSelector((state) => state.chat);
   const [chats, setChats] = useState([]);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [showSearchPopup, setShowSearchPopup] = useState(false);
@@ -28,13 +29,21 @@ const ChatPage = () => {
     const fetchChats = async () => {
       const response = await GetAllChatsApi();
       if (response) {
-        setChats(response);
+        if (selectedOption === "All") {
+          setChats(response);
+        } else if (selectedOption === "Group") {
+          const groupChats = response.filter((chat) => chat.isGroupChat);
+          setChats(groupChats);
+        } else if (selectedOption === "Single") {
+          const personalChats = response.filter((chat) => !chat.isGroupChat);
+          setChats(personalChats);
+        }
         dispatch(saveChatListState({ chatListLength: response.length }));
       }
     };
 
     fetchChats();
-  }, [chatListLength]);
+  }, [chatListLength, selectedOption]);
 
   useEffect(() => {
     if (!users || users.length === 0 || showProfilePopup) {

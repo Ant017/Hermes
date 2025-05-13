@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   chatListLength: 0,
+  selectedOption: "All",
 };
 
 const chatSlice = createSlice({
@@ -15,9 +16,17 @@ const chatSlice = createSlice({
         chatListLength: chatListLength,
       };
     },
+
+    saveSelectedOption: (state, action) => {
+      const { selectedOption } = action.payload;
+      return {
+        ...state,
+        selectedOption: selectedOption,
+      };
+    },
   },
 });
 
-export const { saveChatListState } = chatSlice.actions;
+export const { saveChatListState, saveSelectedOption } = chatSlice.actions;
 
 export default chatSlice.reducer;

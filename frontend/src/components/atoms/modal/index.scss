@@ -23,6 +23,10 @@
     align-items: center;
   }
 
+  &__header {
+    margin-bottom: 15px;
+  }
+
   &__content {
     height: auto;
     backdrop-filter: blur(20px);

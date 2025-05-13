@@ -79,7 +79,7 @@ const LoginForm = ({ onSwitch }) => {
       />
 
       <div className="m-loginForm__forgotPasswordContainer">
-        <CustomCheckBox option="Keep me logged in" />
+        <CustomCheckBox label="Keep me logged in" />
         <p className="m-loginForm__forgotPassword">Forgot password?</p>
       </div>
 

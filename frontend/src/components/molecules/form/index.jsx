@@ -14,14 +14,14 @@ const Form = ({
   onChange,
   icon,
   iconAlt,
-  border,
+  border = "basic",
   padding = "default",
 }) => {
   const className = mapModifiers(
-      "m-form__inputContainer",
-      `border-${border}`,
-      `pd-${padding}`
-    );
+    "m-form__inputContainer",
+    `border-${border}`,
+    `pd-${padding}`
+  );
   return (
     <div className="m-form">
       <label htmlFor={name}>{label}</label>

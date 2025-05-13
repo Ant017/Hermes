@@ -4,16 +4,26 @@ import { chatOptions } from "../../../utils/constants";
 import groupIcon from "/icons/team.png";
 import Button from "../../atoms/button";
 import Modal from "../../atoms/modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import CreateGroupChat from "../modals/createGroupChat";
 import "./index.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { saveSelectedOption } from "../../../redux/slices/chatSlice";
 
 const ChatList = ({ chats }) => {
+  const dispatch = useDispatch();
+  const { userID } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(chatOptions[0]);
 
   const handleClose = () => {
     setShowModal(false);
+  };
+
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    dispatch(saveSelectedOption({ selectedOption: option }));
   };
 
   return (
@@ -43,7 +53,13 @@ const ChatList = ({ chats }) => {
       <div className="m-chatList__chatOption">
         {chatOptions.map((option) => {
           return (
-            <div key={option} className="m-chatList__chatOptionText">
+            <div
+              key={option}
+              className={`${selectedOption === option ? "active" : ""} m-chatList__chatOptionText`}
+              onClick={() => {
+                handleOptionSelect(option);
+              }}
+            >
               {option}
             </div>
           );
@@ -52,7 +68,7 @@ const ChatList = ({ chats }) => {
       <Divider horizontal={true} color="grey-light" />
       <div className="m-chatList__chats">
         {chats && chats.length > 0 ? (
-          chats.slice(0, 10).map((chat) => {
+          chats.map((chat) => {
             return (
               <div className="m-chatList__chat" key={chat._id}>
                 {chat.isGroupChat ? (
@@ -62,11 +78,18 @@ const ChatList = ({ chats }) => {
                     alt="group icon"
                   />
                 ) : (
-                  <img
-                    className="m-chatList__group"
-                    src={groupIcon}
-                    alt="group icon"
-                  />
+                  <div>
+                    {chat.users
+                      .filter((user) => user._id !== userID)
+                      .map((user) => (
+                        <img
+                          key={user._id}
+                          className="m-chatList__group"
+                          src={user.imageUrl}
+                          alt="user icon"
+                        />
+                      ))}
+                  </div>
                 )}
                 <div>
                   <p className="m-chatList__chatName">{chat.chatName}</p>
@@ -85,7 +108,11 @@ const ChatList = ({ chats }) => {
       {/* only changes the physical location of the modal in the DOM, but it still acts as a children of the parent */}
       {showModal &&
         createPortal(
-          <Modal handleClose={handleClose} title="Create A New Group Chat" size="small">
+          <Modal
+            handleClose={handleClose}
+            title="Create A New Group Chat"
+            size="small"
+          >
             <CreateGroupChat closeModal={handleClose} />
           </Modal>,
           document.body
