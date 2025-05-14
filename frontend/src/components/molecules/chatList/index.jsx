@@ -9,7 +9,10 @@ import { createPortal } from "react-dom";
 import CreateGroupChat from "../modals/createGroupChat";
 import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { saveSelectedOption } from "../../../redux/slices/chatSlice";
+import {
+  saveChatId,
+  saveSelectedOption,
+} from "../../../redux/slices/chatSlice";
 
 const ChatList = ({ chats }) => {
   const dispatch = useDispatch();
@@ -55,7 +58,9 @@ const ChatList = ({ chats }) => {
           return (
             <div
               key={option}
-              className={`${selectedOption === option ? "active" : ""} m-chatList__chatOptionText`}
+              className={`${
+                selectedOption === option ? "active" : ""
+              } m-chatList__chatOptionText`}
               onClick={() => {
                 handleOptionSelect(option);
               }}
@@ -70,7 +75,13 @@ const ChatList = ({ chats }) => {
         {chats && chats.length > 0 ? (
           chats.map((chat) => {
             return (
-              <div className="m-chatList__chat" key={chat._id}>
+              <div
+                className="m-chatList__chat"
+                key={chat._id}
+                onClick={() => {
+                  dispatch(saveChatId({ chatId: chat._id }));
+                }}
+              >
                 {chat.isGroupChat ? (
                   <img
                     className="m-chatList__group"

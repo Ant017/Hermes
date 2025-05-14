@@ -1,0 +1,24 @@
+.m-inbox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__sendMessage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  &__sendIcon {
+    width: 22px;
+    height: 22px;
+  }
+}

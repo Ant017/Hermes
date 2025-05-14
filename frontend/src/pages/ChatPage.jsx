@@ -8,6 +8,7 @@ import useCommonHook from "../hooks/useCommonHook";
 import UserSearchPopup from "../components/atoms/userSearchPopup";
 import { useDispatch, useSelector } from "react-redux";
 import { saveChatListState } from "../redux/slices/chatSlice";
+import Inbox from "../components/molecules/inbox";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -87,7 +88,9 @@ const ChatPage = () => {
       </Popup>
       <div className="p-chat__container">
         <ChatList chats={chats} />
-        <div key={chats && chats.length} className="p-chat__right"></div>
+        <div className="p-chat__right">
+          <Inbox />
+        </div>
       </div>
     </div>
   );

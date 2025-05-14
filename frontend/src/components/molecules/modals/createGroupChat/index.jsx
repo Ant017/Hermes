@@ -156,7 +156,7 @@ const CreateGroupChat = ({ closeModal }) => {
         type="submit"
         padding="10"
         backgroundColor="white"
-        borderRadius="2"
+        borderRadius="6"
         width="100"
         value={"Create"}
       />
