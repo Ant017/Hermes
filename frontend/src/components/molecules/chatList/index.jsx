@@ -114,7 +114,13 @@ const ChatList = ({ chats }) => {
                   </div>
                 )}
                 <div>
-                  <p className="m-chatList__chatName">{chat.chatName}</p>
+                  <p className="m-chatList__chatName">
+                    {chat.isGroupChat
+                      ? chat.chatName
+                      : chat.users
+                          .filter((user) => user._id === userID)
+                          .map((user) => user.username)[0]}
+                  </p>
                   <p className="m-chatList__lastMessage">
                     {chat.latestMessage?.content}
                   </p>
