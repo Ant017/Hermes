@@ -19,6 +19,7 @@ const ChatList = ({ chats }) => {
   const { userID } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(chatOptions[0]);
+  const [selectedChat, setSelectedChat] = useState(null);
 
   const handleClose = () => {
     setShowModal(false);
@@ -28,6 +29,13 @@ const ChatList = ({ chats }) => {
     setSelectedOption(option);
     dispatch(saveSelectedOption({ selectedOption: option }));
   };
+
+  useEffect(() => {
+    if (chats && chats.length > 0) {
+      setSelectedChat(chats[0]);
+      dispatch(saveChatId({ chatId: chats[0]._id }));
+    }
+  }, [chats]);
 
   return (
     <div className="m-chatList">
@@ -76,10 +84,13 @@ const ChatList = ({ chats }) => {
           chats.map((chat) => {
             return (
               <div
-                className="m-chatList__chat"
+                className={`${
+                  chat._id === selectedChat?._id ? "active" : ""
+                } m-chatList__chat`}
                 key={chat._id}
                 onClick={() => {
                   dispatch(saveChatId({ chatId: chat._id }));
+                  setSelectedChat(chat);
                 }}
               >
                 {chat.isGroupChat ? (

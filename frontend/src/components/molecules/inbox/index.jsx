@@ -28,7 +28,6 @@ const Inbox = () => {
       content: data.content,
     };
     const response = await sendMessageApi(messageData);
-    console.log("Message sent:", response);
     if (response) {
       setMessages((prevMessages) => [...prevMessages, response]);
     }
@@ -48,6 +47,7 @@ const Inbox = () => {
 
     fetchMessages();
   }, [chatId]);
+
   return (
     <div className="m-inbox">
       <div className="m-inbox__container">
@@ -63,7 +63,6 @@ const Inbox = () => {
           inputType="textarea"
           name={"content"}
           placeholder={"Type a message..."}
-          // rules={{ required: "Cannot send empty message" }}
           control={control}
           errors={errors}
           padding="medium"
