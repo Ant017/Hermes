@@ -16,6 +16,7 @@ const Form = ({
   onChange,
   icon,
   iconAlt,
+  keyDown,
   border = "basic",
   padding = "default",
 }) => {
@@ -74,6 +75,7 @@ const Form = ({
                   placeholder={placeholder}
                   {...(type === "file" ? {} : field)}
                   onChange={type === "file" ? onChange : field.onChange}
+                  onKeyDown={keyDown}
                 />
               ) : (
                 <textarea
@@ -90,6 +92,7 @@ const Form = ({
                     }
                     adjustTextareaHeight(e.target);
                   }}
+                  onKeyDown={keyDown}
                 />
               )}
             </>

@@ -89,7 +89,7 @@ const ChatPage = () => {
       <div className="p-chat__container">
         <ChatList chats={chats} />
         <div className="p-chat__right">
-          <Inbox />
+          <Inbox chats={chats} />
         </div>
       </div>
     </div>

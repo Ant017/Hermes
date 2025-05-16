@@ -121,6 +121,7 @@ class ChatController {
       const message = await messageModel.create({
         sender: req.user.userID,
         content: `${req.user.username} created the group chat`,
+        isChat: false,
         chat: groupChat._id,
       });
 

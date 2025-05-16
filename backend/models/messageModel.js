@@ -10,6 +10,10 @@ const messageModel = mongoose.Schema(
       type: String,
       trim: true,
     },
+    isChat: {
+      type: Boolean,
+      default: true,
+    },
     chat: {
       type: mongoose.Types.ObjectId,
       ref: "Chat",

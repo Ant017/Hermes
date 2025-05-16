@@ -6,12 +6,14 @@ import Form from "../form";
 import { useForm } from "react-hook-form";
 import sendIcon from "/icons/send.png";
 import Button from "../../atoms/button";
+import Divider from "../../atoms/divider";
 
-const Inbox = () => {
+const Inbox = ({ chats }) => {
   const { chatId } = useSelector((state) => state.chat);
   const { userID } = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
   const inboxRef = useRef(null);
+  const formRef = useRef(null);
 
   const {
     handleSubmit,
@@ -43,6 +45,13 @@ const Inbox = () => {
     }
   };
 
+  const onKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(onSubmit)();
+    }
+  };
+
   useEffect(() => {
     const fetchMessages = async () => {
       const response = await getMessageApi(chatId);
@@ -60,10 +69,29 @@ const Inbox = () => {
 
   return (
     <div className="m-inbox">
+      <div className="m-inbox__header">
+        <p className="m-inbox__title">{messages[0]?.chat.chatName}</p>
+        <div className="m-inbox__profilePicContainer">
+
+        </div>
+      </div>
+      <Divider horizontal={true} color="grey-light" />
       <div className="m-inbox__container" ref={inboxRef}>
-        {messages.map((message) => (
-          <>
-            {message.sender._id === userID ? (
+        {messages.map((message) => {
+          if (!message.isChat) {
+            return (
+              <div
+                key={message._id}
+                className="m-inbox__message m-inbox__message--system"
+              >
+                <p className="m-inbox__content m-inbox__content--system">
+                  {message.content}
+                </p>
+              </div>
+            );
+          }
+          if (message.sender._id === userID) {
+            return (
               <div
                 key={message._id}
                 className="m-inbox__message m-inbox__message--self"
@@ -80,7 +108,9 @@ const Inbox = () => {
                   className="m-inbox__profilePic"
                 />
               </div>
-            ) : (
+            );
+          } else {
+            return (
               <div
                 key={message._id}
                 className="m-inbox__message m-inbox__message--other"
@@ -97,29 +127,36 @@ const Inbox = () => {
                   </p>
                 </div>
               </div>
-            )}
-          </>
-        ))}
+            );
+          }
+        })}
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="m-inbox__sendMessage">
-        <Form
-          type={"text"}
-          inputType="textarea"
-          name={"content"}
-          placeholder={"Type a message..."}
-          control={control}
-          errors={errors}
-          padding="medium"
-        />
-        <Button
-          type="submit"
-          className="m-inbox__sendButton"
-          icon={sendIcon}
-          iconAlt="send icon"
-          size="small"
-          backgroundColor="transparent"
-        />
-      </form>
+      {chats && chats.length > 0 && (
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit(onSubmit)}
+          className="m-inbox__sendMessage"
+        >
+          <Form
+            type={"text"}
+            inputType="textarea"
+            name={"content"}
+            placeholder={"Type a message..."}
+            control={control}
+            errors={errors}
+            padding="medium"
+            keyDown={onKeyDown}
+          />
+          <Button
+            type="submit"
+            className="m-inbox__sendButton"
+            icon={sendIcon}
+            iconAlt="send icon"
+            size="small"
+            backgroundColor="transparent"
+          />
+        </form>
+      )}
     </div>
   );
 };

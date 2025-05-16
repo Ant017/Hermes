@@ -34,6 +34,7 @@ class MessageController {
       const newMessage = {
         sender: req.user.userID,
         content: content,
+        isChat: true,
         chat: chatId,
       };
 
