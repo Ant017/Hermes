@@ -16,6 +16,7 @@ const Inbox = () => {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
@@ -32,11 +33,8 @@ const Inbox = () => {
     const response = await sendMessageApi(messageData);
     if (response) {
       setMessages((prevMessages) => [...prevMessages, response]);
+      reset({ content: "" });
     }
-  };
-
-  const clearMessage = (e) => {
-    e.target.value = "";
   };
 
   const scrollToBottom = () => {
@@ -120,7 +118,6 @@ const Inbox = () => {
           iconAlt="send icon"
           size="small"
           backgroundColor="transparent"
-          onClick={(e) => clearMessage(e)}
         />
       </form>
     </div>

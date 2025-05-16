@@ -118,7 +118,7 @@ const ChatList = ({ chats }) => {
                     {chat.isGroupChat
                       ? chat.chatName
                       : chat.users
-                          .filter((user) => user._id === userID)
+                          .filter((user) => user._id !== userID)
                           .map((user) => user.username)[0]}
                   </p>
                   <p className="m-chatList__lastMessage">
