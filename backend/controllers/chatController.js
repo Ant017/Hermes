@@ -33,7 +33,6 @@ class ChatController {
         });
 
       if (existingChat) {
-        console.log("found chat", existingChat);
         return res.status(200).send(success("Chat found", existingChat));
       }
 
@@ -41,10 +40,28 @@ class ChatController {
 
       const newChat = await chatModel.create({
         chatName: sender.username,
+        chatImage: sender.imageUrl,
         users: participants,
       });
+      console.log("newChat", newChat);
 
       const fullChat = await chatModel.findById(newChat._id);
+
+      const otherUser = await userModel.findById(
+        fullChat.users.find(
+          (user) => user.toString() !== req.user.userID.toString()
+        )
+      );
+      const otherUsername = otherUser ? otherUser.username : "";
+
+      console.log("otherUser", otherUser);
+
+      await messageModel.create({
+        sender: req.user.userID,
+        content: `you and ${otherUsername} can now text each other`,
+        isChat: false,
+        chat: newChat._id,
+      });
 
       return res.status(200).send(success("Chat created", fullChat));
     } catch (error) {
@@ -109,6 +126,8 @@ class ChatController {
 
       const groupChat = await chatModel.create({
         chatName,
+        chatImage:
+          "https://static.vecteezy.com/system/resources/previews/000/550/535/non_2x/user-icon-vector.jpg",
         isGroupChat: true,
         groupAdmin: req.user.userID,
         users: allUsers,

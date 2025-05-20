@@ -6,6 +6,15 @@ const chatModel = mongoose.Schema(
       type: String,
       trim: true,
     },
+    chatImage: {
+      type: String,
+      // default: function () {
+      //   return this.isGroupChat
+      //     ? "https://static.vecteezy.com/system/resources/previews/000/550/535/non_2x/user-icon-vector.jpg"
+      //     : "https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png";
+      // },
+      default: "",
+    },
     isGroupChat: {
       type: Boolean,
       default: false,

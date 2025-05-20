@@ -60,7 +60,7 @@ const ChatList = ({ chats }) => {
           </Button>
         </div>
       </div>
-      <Divider horizontal={true} color="grey-light" />
+      {/* <Divider horizontal={true} color="grey-light" /> */}
       <div className="m-chatList__chatOption">
         {chatOptions.map((option) => {
           return (
@@ -78,7 +78,7 @@ const ChatList = ({ chats }) => {
           );
         })}
       </div>
-      <Divider horizontal={true} color="grey-light" />
+      {/* <Divider horizontal={true} color="grey-light" /> */}
       <div className="m-chatList__chats">
         {chats && chats.length > 0 ? (
           chats.map((chat) => {
@@ -93,26 +93,11 @@ const ChatList = ({ chats }) => {
                   setSelectedChat(chat);
                 }}
               >
-                {chat.isGroupChat ? (
-                  <img
-                    className="m-chatList__group"
-                    src={groupIcon}
-                    alt="group icon"
-                  />
-                ) : (
-                  <div>
-                    {chat.users
-                      .filter((user) => user._id !== userID)
-                      .map((user) => (
-                        <img
-                          key={user._id}
-                          className="m-chatList__group"
-                          src={user.imageUrl}
-                          alt="user icon"
-                        />
-                      ))}
-                  </div>
-                )}
+                <img
+                  className="m-chatList__group"
+                  src={chat.chatImage}
+                  alt="group icon"
+                />
                 <div>
                   <p className="m-chatList__chatName">
                     {chat.isGroupChat

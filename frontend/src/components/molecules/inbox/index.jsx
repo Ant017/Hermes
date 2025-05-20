@@ -12,6 +12,7 @@ const Inbox = ({ chats }) => {
   const { chatId } = useSelector((state) => state.chat);
   const { userID } = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
+  const [chatInfo, setChatInfo] = useState([]);
   const inboxRef = useRef(null);
   const formRef = useRef(null);
 
@@ -57,6 +58,7 @@ const Inbox = ({ chats }) => {
       const response = await getMessageApi(chatId);
       if (response) {
         setMessages(response);
+        setChatInfo(response[0].chat?.chatImage);
       }
     };
 
@@ -65,17 +67,25 @@ const Inbox = ({ chats }) => {
 
   useEffect(() => {
     scrollToBottom();
+    // console.log("chatInfo:", chatInfo);
   }, [messages]);
 
   return (
     <div className="m-inbox">
-      <div className="m-inbox__header">
-        <p className="m-inbox__title">{messages[0]?.chat.chatName}</p>
-        <div className="m-inbox__profilePicContainer">
+      {messages.length > 0 && (
+        <div className="m-inbox__header">
+          <img className="m-inbox__image" src={chatInfo} alt="close icon" />
+          <div>
+            <p className="m-inbox__title">{messages[0]?.chat?.chatName}</p>
+            <div className="m-inbox__status">
+              <div className="m-inbox__statusDot"></div>
+              <p className="m-inbox__statusText">Online</p>
+            </div>
+          </div>
 
+          <div className="m-inbox__iconContainer"></div>
         </div>
-      </div>
-      <Divider horizontal={true} color="grey-light" />
+      )}
       <div className="m-inbox__container" ref={inboxRef}>
         {messages.map((message) => {
           if (!message.isChat) {

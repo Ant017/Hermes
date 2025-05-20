@@ -10,9 +10,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $color-black;
     border-radius: 4px 4px 0 0;
-    padding: 20px;
+    padding: 40px 20px 15px 20px;
   }
 
   &__title,
@@ -80,7 +79,7 @@
   &__chats {
     display: flex;
     flex-direction: column;
-    height: 77%;
+    height: calc(100% - 150px);
     overflow-y: auto;
 
     .active {

@@ -9,9 +9,6 @@ class MessageController {
     try {
       const { chatId, content } = req.body;
 
-      console.log("Chat ID:", chatId);
-      console.log("Content:", content);
-
       if (!chatId || !content) {
         return res
           .status(400)
@@ -77,9 +74,19 @@ class MessageController {
       const messages = await messageModel
         .find({ chat: chatId })
         .populate("sender", "username email imageUrl")
-        .populate("chat");
+        .populate({
+          path: "chat",
+          populate: {
+            path: "users",
+            select: "username email imageUrl",
+          },
+        });
 
-      return res.status(200).send(success("Messages fetched successfully", messages));
+      console.log("messages", messages);
+
+      return res
+        .status(200)
+        .send(success("Messages fetched successfully", messages));
     } catch (error) {
       console.error("Error has occurred", error);
       return res.status(500).send(failure("Internal server error", error));
