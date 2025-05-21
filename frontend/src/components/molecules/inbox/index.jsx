@@ -6,7 +6,6 @@ import Form from "../form";
 import { useForm } from "react-hook-form";
 import sendIcon from "/icons/send.png";
 import Button from "../../atoms/button";
-import Divider from "../../atoms/divider";
 
 const Inbox = ({ chats }) => {
   const { chatId } = useSelector((state) => state.chat);
@@ -67,7 +66,6 @@ const Inbox = ({ chats }) => {
 
   useEffect(() => {
     scrollToBottom();
-    // console.log("chatInfo:", chatInfo);
   }, [messages]);
 
   return (
@@ -87,7 +85,12 @@ const Inbox = ({ chats }) => {
         </div>
       )}
       <div className="m-inbox__container" ref={inboxRef}>
-        {messages.map((message) => {
+        {messages.map((message, index) => {
+          const isLastMessage = index === messages.length - 1;
+          const isDifferentSender =
+            index === 0 ||
+            message.sender._id !== messages[index - 1].sender._id;
+
           if (!message.isChat) {
             return (
               <div
@@ -107,16 +110,20 @@ const Inbox = ({ chats }) => {
                 className="m-inbox__message m-inbox__message--self"
               >
                 <div className="m-inbox__messageContent m-inbox__messageContent--self">
-                  <p className="m-inbox__sender">{message.sender.username}</p>
+                  {/* {(isLastMessage || isDifferentSender) && (
+                    <p className="m-inbox__sender">{message.sender.username}</p>
+                  )} */}
                   <p className="m-inbox__content m-inbox__content--self">
                     {message.content}
                   </p>
                 </div>
-                <img
-                  src={message.sender.imageUrl}
-                  alt="profile pic"
-                  className="m-inbox__profilePic"
-                />
+                {(isLastMessage || isDifferentSender) && (
+                  <img
+                    src={message.sender.imageUrl}
+                    alt="profile pic"
+                    className="m-inbox__profilePic"
+                  />
+                )}
               </div>
             );
           } else {
@@ -125,13 +132,17 @@ const Inbox = ({ chats }) => {
                 key={message._id}
                 className="m-inbox__message m-inbox__message--other"
               >
-                <img
-                  src={message.sender.imageUrl}
-                  alt="profile pic"
-                  className="m-inbox__profilePic"
-                />
+                {(isLastMessage || isDifferentSender) && (
+                  <img
+                    src={message.sender.imageUrl}
+                    alt="profile pic"
+                    className="m-inbox__profilePic"
+                  />
+                )}
                 <div className="m-inbox__messageContent m-inbox__messageContent--other">
-                  <p className="m-inbox__sender">{message.sender.username}</p>
+                  {/* {(isLastMessage || isDifferentSender) && (
+                    <p className="m-inbox__sender">{message.sender.username}</p>
+                  )} */}
                   <p className="m-inbox__content m-inbox__content--other">
                     {message.content}
                   </p>
