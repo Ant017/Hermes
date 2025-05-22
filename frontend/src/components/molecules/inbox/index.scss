@@ -120,10 +120,19 @@
       background-color: $color-blue;
       padding: 10px;
     }
+
     &--system {
       color: $color-grey-2;
       font-size: 12px;
       padding: 10px 0 5px 0;
+    }
+    
+    &--margin-self {
+      margin-right: 50px;
+    }
+
+    &--margin-other {
+      margin-left: 50px;
     }
   }
 }

@@ -86,10 +86,9 @@ const Inbox = ({ chats }) => {
       )}
       <div className="m-inbox__container" ref={inboxRef}>
         {messages.map((message, index) => {
-          const isLastMessage = index === messages.length - 1;
-          const isDifferentSender =
-            index === 0 ||
-            message.sender._id !== messages[index - 1].sender._id;
+          const isLastInSequence =
+            index === messages.length - 1 ||
+            messages[index + 1].sender._id !== message.sender._id;
 
           if (!message.isChat) {
             return (
@@ -110,14 +109,15 @@ const Inbox = ({ chats }) => {
                 className="m-inbox__message m-inbox__message--self"
               >
                 <div className="m-inbox__messageContent m-inbox__messageContent--self">
-                  {/* {(isLastMessage || isDifferentSender) && (
-                    <p className="m-inbox__sender">{message.sender.username}</p>
-                  )} */}
-                  <p className="m-inbox__content m-inbox__content--self">
+                  <p
+                    className={`m-inbox__content m-inbox__content--self ${
+                      !isLastInSequence ? "m-inbox__content--margin-self" : ""
+                    }`}
+                  >
                     {message.content}
                   </p>
                 </div>
-                {(isLastMessage || isDifferentSender) && (
+                {isLastInSequence && (
                   <img
                     src={message.sender.imageUrl}
                     alt="profile pic"
@@ -132,7 +132,7 @@ const Inbox = ({ chats }) => {
                 key={message._id}
                 className="m-inbox__message m-inbox__message--other"
               >
-                {(isLastMessage || isDifferentSender) && (
+                {isLastInSequence && (
                   <img
                     src={message.sender.imageUrl}
                     alt="profile pic"
@@ -140,10 +140,11 @@ const Inbox = ({ chats }) => {
                   />
                 )}
                 <div className="m-inbox__messageContent m-inbox__messageContent--other">
-                  {/* {(isLastMessage || isDifferentSender) && (
-                    <p className="m-inbox__sender">{message.sender.username}</p>
-                  )} */}
-                  <p className="m-inbox__content m-inbox__content--other">
+                  <p
+                    className={`m-inbox__content m-inbox__content--other ${
+                      !isLastInSequence ? "m-inbox__content--margin-other" : ""
+                    }`}
+                  >
                     {message.content}
                   </p>
                 </div>

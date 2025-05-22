@@ -43,22 +43,12 @@ class ChatController {
         chatImage: sender.imageUrl,
         users: participants,
       });
-      console.log("newChat", newChat);
 
       const fullChat = await chatModel.findById(newChat._id);
 
-      const otherUser = await userModel.findById(
-        fullChat.users.find(
-          (user) => user.toString() !== req.user.userID.toString()
-        )
-      );
-      const otherUsername = otherUser ? otherUser.username : "";
-
-      console.log("otherUser", otherUser);
-
       await messageModel.create({
         sender: req.user.userID,
-        content: `you and ${otherUsername} can now text each other`,
+        content: `Texting is now enabled`,
         isChat: false,
         chat: newChat._id,
       });
